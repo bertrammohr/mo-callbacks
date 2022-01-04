@@ -6,9 +6,13 @@
 
 **Brug et callback:**
 ```lua
-    local args, du, skal, bruge = "Dette ", "Callback ", "Er ", "Måske "
-    cCallback:TriggerServerCallback("NavnPåMitCallback", {args, du, skal, bruge}, function(values)
-        print(values) -- Values er resultatet fra serverside
+    -- Callbacks virker kun inde i et thread.
+    -- Dette er dog ikke ensbetydende, at du skal lave et thread hver gang du trigger dem. Er din kode allerede i et thread, virker de stadig.
+    Citizen.CreateThread(function() 
+        local args, du, skal, bruge = "Dette ", "Callback ", "Er ", "Måske "
+        cCallback:TriggerServerCallback("NavnPåMitCallback", {args, du, skal, bruge}, function(values)
+            print(values) -- Values er resultatet fra serverside
+        end)
     end)
 ```
 
