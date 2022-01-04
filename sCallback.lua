@@ -1,5 +1,5 @@
 sCallback = {
-    function sCallback:RegisterServerCallback(name, func)
+    RegisterServerCallback = function(self, name, func)
         self[name] = func
     end
 }
