@@ -1,7 +1,7 @@
 cCallback = {
-    function cCallback:TriggerServerCallback(name, args, cb)
+    TriggerServerCallback = function(self, name, args, cb)
         TriggerServerEvent("mo-callback:TriggerServerCallback", name, args)
-        while not self[name] do
+        while self[name] == nil do
             Wait(1)
         end
         cb(self[name])
