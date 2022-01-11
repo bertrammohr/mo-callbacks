@@ -1,13 +1,10 @@
 cCallback = {
-    TriggerServerCallback = function(self, name, args, cb)
-        TriggerServerEvent("mo-callback:TriggerServerCallback", name, args)
-        while self[name] == nil do
-            Wait(1)
-        end
-        cb(self[name])
+    TriggerServerCallback = function(self, name, cb, ...)
+        TriggerServerEvent("mo-callback:TriggerServerCallback", name, ...)
+        self[name] = cb
     end
 }
 RegisterNetEvent("mo-callback:RecieveServerCallback")
-AddEventHandler("mo-callback:RecieveServerCallback", function(name, data)
-    cCallback[name] = data
+AddEventHandler("mo-callback:RecieveServerCallback", function(name, ...)
+    cCallback[name](...)
 end)
