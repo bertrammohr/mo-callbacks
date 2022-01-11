@@ -6,23 +6,21 @@
 
 **Brug et callback:**
 ```lua
-    -- Callbacks virker kun inde i et thread.
-    -- Dette er dog ikke ensbetydende, at du skal lave et thread hver gang du trigger dem. Er din kode allerede i et thread, virker de stadig.
-    Citizen.CreateThread(function() 
-        local args, du, skal, bruge = "Dette ", "Callback ", "Er ", "Måske "
-        cCallback:TriggerServerCallback("NavnPåMitCallback", {args, du, skal, bruge}, function(values)
-            print(values) -- Values er resultatet fra serverside
-        end)
-    end)
+    local args, to, send = "a", "b", "c"
+    cCallback:TriggerServerCallback("yourCallbackName", function(arguments, toBe, returned)
+        print(args, to, send, arguments, toBe, returned)
+        -- Prints: a,   b,   c,   d,   e,   f
+    end, args, to, send)
 ```
 
 ### Server side
 
 **Lav et nyt callback:**
 ```lua
-    sCallback:RegisterServerCallback("NavnPåMitCallback", function(args, du, skal, bruge)
-        local callbackText = args..du..skal..bruge.."Lavet af Mohr"
-        return callbackText
+    sCallback:RegisterServerCallback("yourCallbackName", function(args, to, send)
+        print("Recieved:", args, to, send)
+        local arguments, toBe, returned = "d", "e", "f"
+        return arguments, toBe, returned
     end)
 ```
 
