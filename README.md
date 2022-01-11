@@ -1,7 +1,10 @@
 # Mohr#6969 Callback functions
 
 ## Hvordan bruges det??
+Start med at tilføje koden fra client.lua og server.lua filerne.
+Enten sæt det ind i toppen af dit script, eller load det som en seperat fil.
 
+Derefter, kan du oprette og bruge callbacks, på denne måde:
 ### Client side
 
 **Brug et callback:**
